@@ -8,19 +8,19 @@ import 'dart:convert';
 /// phone : "1-770-736-8031 x56442"
 /// website : "hildegard.org"
 /// company : {"name":"Romaguera-Crona","catchPhrase":"Multi-layered client-server neural-net","bs":"harness real-time e-markets"}
-List<Userlist> userListFromJson(String str) => List<Userlist>.from(json.decode(str).map((x) => Userlist.fromJson(x)));
-String userListToJson(List<Userlist> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Userlist {
-  Userlist({
-      int id, 
-      String name, 
-      String username, 
-      String email, 
-      Address address, 
-      String phone, 
-      String website, 
-      Company company,}){
+List<UserList> userListFromJson(String str) => List<UserList>.from(json.decode(str).map((x) => UserList.fromJson(x)));
+String userListToJson(UserList data) => json.encode(data.toJson());
+class UserList {
+  UserList({
+      int? id, 
+      String? name, 
+      String? username, 
+      String? email, 
+      Address? address, 
+      String? phone, 
+      String? website, 
+      Company? company,}){
     _id = id;
     _name = name;
     _username = username;
@@ -31,7 +31,7 @@ class Userlist {
     _company = company;
 }
 
-  Userlist.fromJson(dynamic json) {
+  UserList.fromJson(dynamic json) {
     _id = json['id'];
     _name = json['name'];
     _username = json['username'];
@@ -41,23 +41,23 @@ class Userlist {
     _website = json['website'];
     _company = json['company'] != null ? Company.fromJson(json['company']) : null;
   }
-  int _id;
-  String _name;
-  String _username;
-  String _email;
-  Address _address;
-  String _phone;
-  String _website;
-  Company _company;
+  int? _id;
+  String? _name;
+  String? _username;
+  String? _email;
+  Address? _address;
+  String? _phone;
+  String? _website;
+  Company? _company;
 
-  int get id => _id;
-  String get name => _name;
-  String get username => _username;
-  String get email => _email;
-  Address get address => _address;
-  String get phone => _phone;
-  String get website => _website;
-  Company get company => _company;
+  int? get id => _id;
+  String? get name => _name;
+  String? get username => _username;
+  String? get email => _email;
+  Address? get address => _address;
+  String? get phone => _phone;
+  String? get website => _website;
+  Company? get company => _company;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -66,12 +66,12 @@ class Userlist {
     map['username'] = _username;
     map['email'] = _email;
     if (_address != null) {
-      map['address'] = _address.toJson();
+      map['address'] = _address?.toJson();
     }
     map['phone'] = _phone;
     map['website'] = _website;
     if (_company != null) {
-      map['company'] = _company.toJson();
+      map['company'] = _company?.toJson();
     }
     return map;
   }
@@ -82,11 +82,13 @@ class Userlist {
 /// catchPhrase : "Multi-layered client-server neural-net"
 /// bs : "harness real-time e-markets"
 
+Company companyFromJson(String str) => Company.fromJson(json.decode(str));
+String companyToJson(Company data) => json.encode(data.toJson());
 class Company {
   Company({
-      String name, 
-      String catchPhrase, 
-      String bs,}){
+      String? name, 
+      String? catchPhrase, 
+      String? bs,}){
     _name = name;
     _catchPhrase = catchPhrase;
     _bs = bs;
@@ -97,13 +99,13 @@ class Company {
     _catchPhrase = json['catchPhrase'];
     _bs = json['bs'];
   }
-  String _name;
-  String _catchPhrase;
-  String _bs;
+  String? _name;
+  String? _catchPhrase;
+  String? _bs;
 
-  String get name => _name;
-  String get catchPhrase => _catchPhrase;
-  String get bs => _bs;
+  String? get name => _name;
+  String? get catchPhrase => _catchPhrase;
+  String? get bs => _bs;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -121,13 +123,15 @@ class Company {
 /// zipcode : "92998-3874"
 /// geo : {"lat":"-37.3159","lng":"81.1496"}
 
+Address addressFromJson(String str) => Address.fromJson(json.decode(str));
+String addressToJson(Address data) => json.encode(data.toJson());
 class Address {
   Address({
-      String street, 
-      String suite, 
-      String city, 
-      String zipcode, 
-      Geo geo,}){
+      String? street, 
+      String? suite, 
+      String? city, 
+      String? zipcode, 
+      Geo? geo,}){
     _street = street;
     _suite = suite;
     _city = city;
@@ -142,17 +146,17 @@ class Address {
     _zipcode = json['zipcode'];
     _geo = json['geo'] != null ? Geo.fromJson(json['geo']) : null;
   }
-  String _street;
-  String _suite;
-  String _city;
-  String _zipcode;
-  Geo _geo;
+  String? _street;
+  String? _suite;
+  String? _city;
+  String? _zipcode;
+  Geo? _geo;
 
-  String get street => _street;
-  String get suite => _suite;
-  String get city => _city;
-  String get zipcode => _zipcode;
-  Geo get geo => _geo;
+  String? get street => _street;
+  String? get suite => _suite;
+  String? get city => _city;
+  String? get zipcode => _zipcode;
+  Geo? get geo => _geo;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -161,7 +165,7 @@ class Address {
     map['city'] = _city;
     map['zipcode'] = _zipcode;
     if (_geo != null) {
-      map['geo'] = _geo.toJson();
+      map['geo'] = _geo?.toJson();
     }
     return map;
   }
@@ -171,10 +175,12 @@ class Address {
 /// lat : "-37.3159"
 /// lng : "81.1496"
 
+Geo geoFromJson(String str) => Geo.fromJson(json.decode(str));
+String geoToJson(Geo data) => json.encode(data.toJson());
 class Geo {
   Geo({
-      String lat, 
-      String lng,}){
+      String? lat, 
+      String? lng,}){
     _lat = lat;
     _lng = lng;
 }
@@ -183,11 +189,11 @@ class Geo {
     _lat = json['lat'];
     _lng = json['lng'];
   }
-  String _lat;
-  String _lng;
+  String? _lat;
+  String? _lng;
 
-  String get lat => _lat;
-  String get lng => _lng;
+  String? get lat => _lat;
+  String? get lng => _lng;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
