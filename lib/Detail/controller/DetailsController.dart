@@ -10,14 +10,7 @@ class DetailsController extends GetxController {
   var repo = Get.find<HomeRepo>();
   UserList? userlist;
 
-  @override
-  void onInit() {
-    fetchUserList();
-    super.onInit();
-  }
-
   fetchUserList() async {
-    print("Entered");
     var userDetail = Get.arguments;
 
     try {
